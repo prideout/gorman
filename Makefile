@@ -4,7 +4,7 @@ TARG=rman
 
 CGOFILES=\
 	rman.go \
-	README.go \
+	README \
 
 CGO_CFLAGS=-I$(RMANTREE)/include
 CGO_LDFLAGS+=-L$(RMANTREE)/lib
