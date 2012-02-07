@@ -3,7 +3,8 @@ include $(GOROOT)/src/Make.inc
 TARG=rman
 
 CGOFILES=\
-	rman.go
+	rman.go \
+	README.go \
 
 CGO_CFLAGS=-I$(RMANTREE)/include
 CGO_LDFLAGS+=-L$(RMANTREE)/lib
