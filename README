@@ -13,3 +13,5 @@ Take a look at rman_test.go for a bigger example.  Enjoy!
 
 */
 package rman
+
+import "C"
