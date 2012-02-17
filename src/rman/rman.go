@@ -1,5 +1,7 @@
 package rman
 
+// #cgo CFLAGS: -I/opt/pixar/RenderManProServer-16.4/include
+// #cgo LDFLAGS: -L/opt/pixar/RenderManProServer-16.4/lib -lprman -Wl,-rpath /opt/pixar/RenderManProServer-16.4/lib
 // #include <stdlib.h>
 // #include "ri.h"
 import "C"

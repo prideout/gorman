@@ -3,7 +3,7 @@ package rman_test
 import (
     "bufio"
     "fmt"
-    ri "gorman"
+    ri "rman"
     "os"
     "os/exec"
     "strings"
