@@ -1,7 +1,10 @@
-Usage
+About
 -----
 
-RenderMan bindings for golang.  Makes extensive use of go's nice support for variadic functions.  For example:
+RenderMan bindings for golang.  Work in progress.
+
+Example
+-------
 
     package main
     import ri "rman"
