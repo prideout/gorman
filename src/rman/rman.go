@@ -11,6 +11,8 @@ import (
     "unsafe"
 )
 
+var RENDER string = C.GoString(C.RI_RENDER)
+
 func Display(name string, dtype string, mode string, varargs ...interface{}) {
     pName := C.CString(name)
     defer C.free(unsafe.Pointer(pName))
