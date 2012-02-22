@@ -27,3 +27,4 @@ Next:
     export GOPATH=$GOPATH:$PWD
     go install ./src/rman
     go test ./src/rman
+    go build sphere.go; ./sphere

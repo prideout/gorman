@@ -51,6 +51,44 @@ func Torus(majrad float32, minrad float32,
     C.RiTorusV(a, i, p, x, t, nArgs, pNames, pVals)
 }
 
+func Sphere(radius float32, zmin float32, zmax float32,
+	ϴmax float32, varargs ...interface{}) {
+    r := C.RtFloat(radius)
+    z0 := C.RtFloat(zmin)
+    z1 := C.RtFloat(zmax)
+    t := C.RtFloat(ϴmax)
+    names, values, ownership := unzipArgs(varargs...)
+    defer freeArgs(names, ownership)
+    nArgs := C.RtInt(len(varargs) / 2)
+    pNames, pVals := safeArgs(names, values)
+    C.RiSphereV(r, z0, z1, t, nArgs, pNames, pVals)
+}
+
+func Cone(height float32, radius float32, ϴmax float32,
+	varargs ...interface{}) {
+    h := C.RtFloat(height)
+    r := C.RtFloat(radius)
+    t := C.RtFloat(ϴmax)
+    names, values, ownership := unzipArgs(varargs...)
+    defer freeArgs(names, ownership)
+    nArgs := C.RtInt(len(varargs) / 2)
+    pNames, pVals := safeArgs(names, values)
+    C.RiConeV(h, r, t, nArgs, pNames, pVals)
+}
+
+func Cylinder(radius float32, zmin float32, zmax float32,
+	ϴmax float32, varargs ...interface{}) {
+    r := C.RtFloat(radius)
+    z0 := C.RtFloat(zmin)
+    z1 := C.RtFloat(zmax)
+    t := C.RtFloat(ϴmax)
+    names, values, ownership := unzipArgs(varargs...)
+    defer freeArgs(names, ownership)
+    nArgs := C.RtInt(len(varargs) / 2)
+    pNames, pVals := safeArgs(names, values)
+    C.RiCylinderV(r, z0, z1, t, nArgs, pNames, pVals)
+}
+
 func Curves(basis string, spans []int,
     wrap string, varargs ...interface{}) {
     pBasis := C.CString(basis)
@@ -75,6 +113,16 @@ func Attribute(name string, varargs ...interface{}) {
     nArgs := C.RtInt(len(varargs) / 2)
     pNames, pVals := safeArgs(names, values)
     C.RiAttributeV(pName, nArgs, pNames, pVals)
+}
+
+func Geometry(name string, varargs ...interface{}) {
+    pName := C.CString(name)
+    defer C.free(unsafe.Pointer(pName))
+    names, values, ownership := unzipArgs(varargs...)
+    defer freeArgs(names, ownership)
+    nArgs := C.RtInt(len(varargs) / 2)
+    pNames, pVals := safeArgs(names, values)
+    C.RiGeometryV(pName, nArgs, pNames, pVals)
 }
 
 func Option(name string, varargs ...interface{}) {
@@ -184,6 +232,22 @@ func PixelSamples(x, y float32) {
 
 func Translate(x, y, z float32) {
     C.RiTranslate(C.RtFloat(x), C.RtFloat(y), C.RtFloat(z))
+}
+
+func Color(r, g, b float32) {
+	color := [3]C.RtFloat{
+		C.RtFloat(r),
+		C.RtFloat(g),
+		C.RtFloat(b)}
+    C.RiColor(&color[0])
+}
+
+func Opacity(r, g, b float32) {
+	opacity := [3]C.RtFloat{
+		C.RtFloat(r),
+		C.RtFloat(g),
+		C.RtFloat(b)}
+    C.RiOpacity(&opacity[0])
 }
 
 func Rotate(angle, x, y, z float32) {
