@@ -1,11 +1,18 @@
 /*
 
-    RenderMan bindings for golang.  Makes extensive use of go's nice support for variadic functions.  For example:
+    RenderMan bindings for golang.  For example:
 
+    package main
     import ri "rman"
-    void main() {
-        ri.Begin("")
-        // Draw a plastic teapot?
+    func main() {
+        ri.Begin("launch:prman? -t")
+        ri.Display("sphere.tif", "file", "rgba")
+        ri.Projection("perspective", "fov", 30.)
+        ri.WorldBegin()
+        ri.Color(0.9, 0.3, 0.1)
+        ri.Translate(0, 0, 5)
+        ri.Sphere(1.0, -1.0, 1.0, 360.0)
+        ri.WorldEnd()
         ri.End()
     }
 
